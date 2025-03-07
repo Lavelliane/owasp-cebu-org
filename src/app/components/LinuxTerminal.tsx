@@ -37,7 +37,15 @@ export const directories = {
             name: "team.txt",
             type: "file",
             path: "/about/team.txt",
-            content: "Our team consists of security professionals, developers, and enthusiasts dedicated to improving cybersecurity in Cebu. Chapter Leaders: Jhury Kevin Lastre (jhurykev.lastre@owasp.org) and Vincent Abella (github: @roastedbeans)."
+            content: `Our team consists of security professionals, developers, and enthusiasts dedicated to improving cybersecurity in Cebu.
+                        Chapter Leaders: 
+                        Jhury Kevin Lastre (jhurykev.lastre@owasp.org)
+                        - Software Engineer @ TaxMaverick Software
+                        - Masters in Information Security @ Kookmin University, South Korea
+                        Vincent Abella (github: @roastedbeans)
+                        - Software Developer @ Mod Technologies
+                        - Masters in Information Security @ Kookmin University, South Korea
+                        `
           }
         }
       },
@@ -69,7 +77,7 @@ export const directories = {
             name: "schedule.txt",
             type: "file",
             path: "/events/schedule.txt",
-            content: "Monthly meetups on the last Saturday of each month. Special workshops announced quarterly."
+            content: "Something will be here soon."
           }
         }
       },
@@ -101,7 +109,7 @@ export const directories = {
             name: "info.txt",
             type: "file",
             path: "/contact/info.txt",
-            content: "Email: cebu@owasp.org\nTwitter: @OWASPCebu\nMeetup: meetup.com/owasp-cebu"
+            content: "Email: jhurykev.lastre@owasp.org\nFacebook: OWASP Cebu"
           }
         }
       }
