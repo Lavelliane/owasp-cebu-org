@@ -147,7 +147,7 @@ const LinuxTerminal: React.FC = () => {
            <img src="/OWASP_Icon_R_White.png" alt="Logo" width="200" height="auto"/>
           </pre>
           <div>Welcome to OWASP Cebu v1.0.0</div>
-          <div>Type 'help' to see available commands</div>
+          <div>Type &apos;help&apos; to see available commands</div>
           <div>Press TAB to autocomplete when commands are suggested</div>
         </>
       ),
@@ -333,7 +333,7 @@ const LinuxTerminal: React.FC = () => {
     if (!path) return currentDirectory;
     
     // Handle absolute vs relative path
-    let fullPath = path.startsWith('/') ? path : `${currentDirectory}${currentDirectory.endsWith('/') ? '' : '/'}${path}`;
+    const fullPath = path.startsWith('/') ? path : `${currentDirectory}${currentDirectory.endsWith('/') ? '' : '/'}${path}`;
     
     // Normalize path (handle ../, ./, and multiple slashes)
     const parts = fullPath.split('/').filter(Boolean);
@@ -684,7 +684,7 @@ const LinuxTerminal: React.FC = () => {
     
     let recursive = false;
     let force = false;
-    let files: string[] = [];
+    const files: string[] = [];
     
     // Process arguments
     for (let i = 1; i < args.length; i++) {
