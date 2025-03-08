@@ -80,25 +80,25 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
       case '/about':
         return (
           <div className="prose lg:prose-xl">
-            <h2 className="text-3xl font-bold mb-6">About OWASP Cebu</h2>
-            <p className="text-lg text-gray-700 mb-4">
+            <h2 className="text-3xl font-bold mb-6 text-indigo-900">About OWASP Cebu</h2>
+            <p className="text-lg text-gray-900 mb-4">
               OWASP Cebu's mission is to promote web application security awareness and best practices in the Cebu region.
             </p>
             
             <div className="mb-12">
-              <h3 className="text-2xl font-bold mb-6 text-gray-900">Our Team</h3>
+              <h3 className="text-2xl font-bold mb-6 text-indigo-800">Our Team</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
-                  <h3 className="font-semibold text-lg mb-2">Jhury Kevin Lastre</h3>
-                  <p className="text-gray-600 text-sm mb-2">Chapter Leader</p>
-                  <p className="text-gray-700">Software Engineer @ TaxMaverick Software</p>
-                  <p className="text-gray-700">Masters in Information Security @ Kookmin University, South Korea</p>
+                  <h3 className="font-semibold text-lg mb-2 text-indigo-900">Jhury Kevin Lastre</h3>
+                  <p className="text-indigo-600 text-sm mb-2 font-medium">Chapter Leader</p>
+                  <p className="text-gray-900">Software Engineer @ TaxMaverick Software</p>
+                  <p className="text-gray-900">Masters in Information Security @ Kookmin University, South Korea</p>
                 </div>
                 <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
-                  <h3 className="font-semibold text-lg mb-2">Vincent Abella</h3>
-                  <p className="text-gray-600 text-sm mb-2">Chapter Leader</p>
-                  <p className="text-gray-700">Software Developer @ Mod Technologies</p>
-                  <p className="text-gray-700">Masters in Information Security @ Kookmin University, South Korea</p>
+                  <h3 className="font-semibold text-lg mb-2 text-indigo-900">Vincent Abella</h3>
+                  <p className="text-indigo-600 text-sm mb-2 font-medium">Chapter Leader</p>
+                  <p className="text-gray-900">Software Developer @ Mod Technologies</p>
+                  <p className="text-gray-900">Masters in Information Security @ Kookmin University, South Korea</p>
                 </div>
               </div>
             </div>
@@ -107,21 +107,21 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
       case '/projects':
         return (
           <div className="prose lg:prose-xl">
-            <h2 className="text-3xl font-bold mb-6">Our Projects</h2>
-            <p className="text-lg text-gray-700 mb-4">
+            <h2 className="text-3xl font-bold mb-6 text-indigo-900">Our Projects</h2>
+            <p className="text-lg text-gray-900 mb-4">
               OWASP Cebu is involved in various security projects aimed at improving web application security in the region.
             </p>
             
             <div className="my-8 p-6 bg-white rounded-xl shadow-md border border-gray-100">
               <h3 className="text-xl font-semibold mb-3 text-indigo-800">Current Projects</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-900">
                 Security awareness training, vulnerability assessment workshops, and secure coding practices seminars.
               </p>
             </div>
             
             <div className="my-8 p-6 bg-white rounded-xl shadow-md border border-gray-100">
               <h3 className="text-xl font-semibold mb-3 text-indigo-800">Upcoming Projects</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-900">
                 CTF competitions, security hackathons, and community outreach programs.
               </p>
             </div>
@@ -130,17 +130,17 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
       case '/events':
         return (
           <div className="prose lg:prose-xl">
-            <h2 className="text-3xl font-bold mb-6">Events</h2>
-            <p className="text-lg text-gray-700 mb-4">
+            <h2 className="text-3xl font-bold mb-6 text-indigo-900">Events</h2>
+            <p className="text-lg text-gray-900 mb-4">
               Join us for our upcoming events and workshops focused on web application security.
             </p>
             
             <div className="my-8 p-6 bg-white rounded-xl shadow-md border border-gray-100">
               <h3 className="text-xl font-semibold mb-3 text-indigo-800">Upcoming Events</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-900">
                 Stay tuned for our upcoming security workshops and community meetups.
               </p>
-              <p className="text-gray-700 mt-4">
+              <p className="text-gray-900 mt-4">
                 Something will be here soon.
               </p>
             </div>
@@ -149,21 +149,21 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
       case '/resources':
         return (
           <div className="prose lg:prose-xl">
-            <h2 className="text-3xl font-bold mb-6">Resources</h2>
-            <p className="text-lg text-gray-700 mb-4">
+            <h2 className="text-3xl font-bold mb-6 text-indigo-900">Resources</h2>
+            <p className="text-lg text-gray-900 mb-4">
               Explore our collection of security resources and tools.
             </p>
             
             <div className="my-8 p-6 bg-white rounded-xl shadow-md border border-gray-100">
               <h3 className="text-xl font-semibold mb-3 text-indigo-800">Recommended Tools</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-900">
                 Recommended security tools: OWASP ZAP, Burp Suite, Metasploit, Nmap, and Wireshark.
               </p>
             </div>
             
             <div className="my-8 p-6 bg-white rounded-xl shadow-md border border-gray-100">
               <h3 className="text-xl font-semibold mb-3 text-indigo-800">Security Guides</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-900">
                 OWASP Top 10, Secure Coding Guidelines, and Web Application Security Testing Guide.
               </p>
             </div>
@@ -175,12 +175,12 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
             {/* Featured Card */}
             <div className="mb-12 bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl p-8 border border-indigo-100 shadow-sm">
               <h2 className="text-3xl font-bold text-indigo-900 mb-4">Welcome to OWASP Cebu</h2>
-              <p className="text-lg text-gray-700 mb-4">
+              <p className="text-lg text-gray-900 mb-4">
                 OWASP Cebu is a chapter of OWASP, the Open Web Application Security Project. 
                 We are a community of security professionals, developers, and enthusiasts 
                 dedicated to improving cybersecurity in Cebu.
               </p>
-              <p className="text-lg text-gray-700 mb-4">
+              <p className="text-lg text-gray-900 mb-4">
                 Explore our resources using the navigation above or try our interactive terminal
                 by clicking the icon in the bottom right corner.
               </p>
@@ -193,14 +193,14 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
                 <h3 className="text-xl font-semibold mb-3 text-indigo-800">Upcoming Events</h3>
-                <p className="text-gray-700">
+                <p className="text-gray-900">
                   Stay tuned for our upcoming security workshops and community meetups.
                 </p>
                 <a href="#" className="inline-block mt-4 text-indigo-600 hover:text-indigo-800">View all events →</a>
               </div>
               <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
                 <h3 className="text-xl font-semibold mb-3 text-indigo-800">Latest Projects</h3>
-                <p className="text-gray-700">
+                <p className="text-gray-900">
                   Security awareness training, vulnerability assessment workshops, and secure coding practices seminars.
                 </p>
                 <a href="#" className="inline-block mt-4 text-indigo-600 hover:text-indigo-800">Explore projects →</a>
@@ -209,19 +209,19 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
 
             {/* Team Section */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6 text-gray-900">Our Team</h2>
+              <h2 className="text-2xl font-bold mb-6 text-indigo-900">Our Team</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
-                  <h3 className="font-semibold text-lg mb-2">Jhury Kevin Lastre</h3>
-                  <p className="text-gray-600 text-sm mb-2">Chapter Leader</p>
-                  <p className="text-gray-700">Software Engineer @ TaxMaverick Software</p>
-                  <p className="text-gray-700">Masters in Information Security @ Kookmin University, South Korea</p>
+                  <h3 className="font-semibold text-lg mb-2 text-indigo-900">Jhury Kevin Lastre</h3>
+                  <p className="text-indigo-600 text-sm mb-2 font-medium">Chapter Leader</p>
+                  <p className="text-gray-900">Software Engineer @ TaxMaverick Software</p>
+                  <p className="text-gray-900">Masters in Information Security @ Kookmin University, South Korea</p>
                 </div>
                 <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
-                  <h3 className="font-semibold text-lg mb-2">Vincent Abella</h3>
-                  <p className="text-gray-600 text-sm mb-2">Chapter Leader</p>
-                  <p className="text-gray-700">Software Developer @ Mod Technologies</p>
-                  <p className="text-gray-700">Masters in Information Security @ Kookmin University, South Korea</p>
+                  <h3 className="font-semibold text-lg mb-2 text-indigo-900">Vincent Abella</h3>
+                  <p className="text-indigo-600 text-sm mb-2 font-medium">Chapter Leader</p>
+                  <p className="text-gray-900">Software Developer @ Mod Technologies</p>
+                  <p className="text-gray-900">Masters in Information Security @ Kookmin University, South Korea</p>
                 </div>
               </div>
             </div>
