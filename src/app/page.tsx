@@ -1,8 +1,7 @@
-import LinuxTerminal from "./components/LinuxTerminal";
+import BlogLayout from "./components/BlogLayout";
+
 export default function Home() {
   return (
-    <>
-      <LinuxTerminal />
-    </>
+    <BlogLayout />
   );
 }
