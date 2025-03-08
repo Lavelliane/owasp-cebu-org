@@ -15,6 +15,11 @@ interface TerminalOutput {
   content: ReactNode;
 }
 
+// Define props interface for LinuxTerminal
+interface LinuxTerminalProps {
+  onNavigate?: (path: string) => void;
+}
+
 // The directory structure provided
 export const directories = {
   root: {
@@ -135,7 +140,7 @@ const availableCommands = [
   { command: 'logout', description: 'Logout from the terminal (simulation only)' }
 ];
 
-const LinuxTerminal: React.FC = () => {
+const LinuxTerminal: React.FC<LinuxTerminalProps> = ({ onNavigate }) => {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
   const [currentDirectory, setCurrentDirectory] = useState<string>('/');
@@ -562,27 +567,30 @@ const LinuxTerminal: React.FC = () => {
   };
 
   const changeDirectory = (path?: string): void => {
-    if (!path || path === '') {
-      // Default to root
-      setCurrentDirectory('/');
+    if (!path) {
+      addOutput("cd: missing operand", "error");
       return;
     }
-    
-    const newPath = resolvePath(path);
-    const dir = getItemAtPath(newPath);
-    
-    if (!dir) {
-      addOutput(`cd: no such file or directory: ${path}`, 'error');
+
+    const resolvedPath = resolvePath(path);
+    const item = getItemAtPath(resolvedPath);
+
+    if (!item) {
+      addOutput(`cd: ${path}: No such file or directory`, "error");
       return;
     }
-    
-    if (dir.type !== 'directory') {
-      addOutput(`cd: not a directory: ${path}`, 'error');
+
+    if (item.type !== "directory") {
+      addOutput(`cd: ${path}: Not a directory`, "error");
       return;
     }
+
+    setCurrentDirectory(resolvedPath);
     
-    // Change directory
-    setCurrentDirectory(newPath);
+    // Trigger navigation in the parent component if onNavigate is provided
+    if (onNavigate) {
+      onNavigate(resolvedPath);
+    }
   };
 
   const catFile = (path?: string): void => {
@@ -803,9 +811,10 @@ Press Tab for command and path autocompletion.
       <style jsx>{`
         .terminal-container {
           width: 100%;
-          height: 100vh;
+          height: 100%;
           display: flex;
           flex-direction: column;
+          overflow: hidden;
         }
         
         .terminal {
