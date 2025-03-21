@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
@@ -13,7 +13,7 @@ interface UserWithRole {
   role: string;
 }
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -85,6 +85,3 @@ const authOptions: NextAuthOptions = {
     }
   }
 };
-
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST }; 

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { hashPassword, isStrongPassword } from "@/lib/auth/utils";
+import { Role } from "@prisma/client";
 
 // Validation schema
 const registerSchema = z.object({
@@ -45,12 +46,13 @@ export async function POST(request: NextRequest) {
     // Hash the password
     const hashedPassword = await hashPassword(password);
 
-    // Create the user
+    // Create the user with default role as "member"
     const user = await prisma.user.create({
       data: {
         name,
         email,
         password: hashedPassword,
+        role: Role.MEMBER, // Default role using enum
       },
     });
 
@@ -60,6 +62,7 @@ export async function POST(request: NextRequest) {
         id: user.id,
         name: user.name,
         email: user.email,
+        role: user.role,
         createdAt: user.createdAt,
       },
       { status: 201 }

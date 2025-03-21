@@ -14,11 +14,17 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum Role {
+  ADMIN
+  MEMBER
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String
   email         String    @unique
   password      String
+  role          Role      @default(MEMBER)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
@@ -60,4 +66,16 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model CTF {
+  id          String   @id @default(cuid())
+  title       String
+  description String    @db.Text
+  hint        String?   @db.Text
+  category    String
+  flag        String
+  score       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
