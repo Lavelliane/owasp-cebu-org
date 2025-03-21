@@ -35,7 +35,7 @@ async function checkAdminAuth() {
 // GET - Retrieve a specific CTF
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const authCheck = await checkAdminAuth();
@@ -46,8 +46,9 @@ export async function GET(
       );
     }
     
+    const { id } = await params;
     const ctf = await prisma.cTF.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
     
     if (!ctf) {
@@ -70,7 +71,7 @@ export async function GET(
 // PUT - Update a specific CTF
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const authCheck = await checkAdminAuth();
@@ -81,9 +82,10 @@ export async function PUT(
       );
     }
     
+    const { id } = await params;
     // Check if CTF exists
     const existingCTF = await prisma.cTF.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
     
     if (!existingCTF) {
@@ -108,7 +110,7 @@ export async function PUT(
     
     // Update the CTF
     const updatedCTF = await prisma.cTF.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData,
     });
     
@@ -125,7 +127,7 @@ export async function PUT(
 // DELETE - Delete a specific CTF
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const authCheck = await checkAdminAuth();
@@ -136,9 +138,10 @@ export async function DELETE(
       );
     }
     
+    const { id } = await params;
     // Check if CTF exists
     const existingCTF = await prisma.cTF.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
     
     if (!existingCTF) {
@@ -150,7 +153,7 @@ export async function DELETE(
     
     // Delete the CTF
     await prisma.cTF.delete({
-      where: { id: params.id },
+      where: { id },
     });
     
     return NextResponse.json(

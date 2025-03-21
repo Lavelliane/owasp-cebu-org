@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -23,8 +23,9 @@ export async function GET(
     }
 
     // Get the CTF
+    const { id } = await params;
     const ctf = await prisma.cTF.findUnique({
-      where: { id: params.id },
+      where: { id },
       select: {
         id: true,
         title: true,

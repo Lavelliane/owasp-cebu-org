@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -12,13 +12,14 @@ export async function POST(
     if (!session || !session.user) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
+    const { id } = await params;
     
     // Get user
     const user = await prisma.user.findUnique({
       where: { email: session.user.email as string },
       include: {
         solvedCTFs: {
-          where: { ctfId: params.id }
+          where: { ctfId: id }
         }
       }
     });
@@ -37,7 +38,7 @@ export async function POST(
 
     // Get the CTF
     const ctf = await prisma.cTF.findUnique({
-      where: { id: params.id }
+      where: { id }
     });
     
     if (!ctf) {

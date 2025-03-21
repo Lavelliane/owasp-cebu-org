@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -21,12 +21,12 @@ const ctfSchema = z.object({
 
 type CTFFormData = z.infer<typeof ctfSchema>;
 
-export default function EditCTFPage({ params }: { params: { id: string } }) {
+export default function EditCTFPage({params}: {params: Promise<{ id: string }>}) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState('');
-  const id = params.id;
+  const { id } = use(params);
   
   const {
     register,

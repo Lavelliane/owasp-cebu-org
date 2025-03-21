@@ -13,9 +13,8 @@ interface CTFDetails {
   isSolved: boolean;
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const awaitedParams = await params;
-  const id = awaitedParams?.id;
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const ctf = await prisma.cTF.findUnique({
     where: { id },
     select: { title: true }
@@ -27,10 +26,9 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-export default async function CTFDetailPage({ params }: { params: { id: string } }) {
+export default async function CTFDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession();
-  const awaitedParams = await params;
-  const id = awaitedParams?.id;
+  const { id } = await params;
   
   // Redirect to login if not authenticated
   if (!session?.user) {
