@@ -12,7 +12,7 @@ const ctfSchema = z.object({
   link: z.string().optional(),
   category: z.string().min(1, 'Category is required'),
   flag: z.string().min(1, 'Flag is required'),
-  score: z.number().min(1, 'Score must be at least 1').max(1000, 'Score must be at most 1000')
+  score: z.number().min(0, 'Score must be at least 0').max(999999, 'Score must be at most 999999')
 });
 
 // GET - Retrieve all CTFs
