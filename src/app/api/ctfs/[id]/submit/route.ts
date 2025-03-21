@@ -14,14 +14,13 @@ export async function POST(
     }
     const { id } = await params;
     
-    // Get user
+    // Get user with any solved CTFs
     const user = await prisma.user.findUnique({
       where: { email: session.user.email as string },
       include: {
         solvedCTFs: {
           where: { 
-            ctfId: id,
-            solvedAt: { not: undefined }
+            ctfId: id
           }
         }
       }
@@ -31,8 +30,9 @@ export async function POST(
       return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
 
-    // Check if already solved
-    if (user.solvedCTFs.length > 0) {
+    // Check if already solved by checking if solvedAt is not null
+    const userCTF = user.solvedCTFs[0];
+    if (userCTF?.solvedAt) {
       return NextResponse.json({
         message: 'You have already solved this challenge',
         correct: true
@@ -59,9 +59,10 @@ export async function POST(
       );
     }
 
-    // Create a submission record
+    // Check if flag is correct
     const correct = flag.trim() === ctf.flag.trim();
     
+    // Create a submission record
     await prisma.submission.create({
       data: {
         flag,
@@ -74,33 +75,56 @@ export async function POST(
     // If correct, mark as solved and update points
     if (correct) {
       try {
-        await prisma.$transaction([
-          // Upsert the SolvedCTF record with solvedAt timestamp
-          prisma.solvedCTF.upsert({
-            where: {
-              userId_ctfId: {
-                userId: user.id,
-                ctfId: ctf.id
+        const now = new Date();
+        
+        if (userCTF) {
+          // Update existing record
+          await prisma.$transaction([
+            // Update the SolvedCTF record with solvedAt timestamp
+            prisma.solvedCTF.update({
+              where: {
+                userId_ctfId: {
+                  userId: user.id,
+                  ctfId: ctf.id
+                }
+              },
+              data: {
+                solvedAt: now
               }
-            },
-            update: {
-              solvedAt: new Date()
-            },
-            create: {
-              userId: user.id,
-              ctfId: ctf.id,
-              startedAt: new Date(),
-              solvedAt: new Date()
-            }
-          }),
-          // Update user points
-          prisma.user.update({
-            where: { id: user.id },
-            data: {
-              points: user.points + ctf.score
-            }
-          })
-        ]);
+            }),
+            // Update user points
+            prisma.user.update({
+              where: { id: user.id },
+              data: {
+                points: {
+                  increment: ctf.score
+                }
+              }
+            })
+          ]);
+        } else {
+          // Create new record
+          await prisma.$transaction([
+            // Create the SolvedCTF record
+            prisma.solvedCTF.create({
+              data: {
+                userId: user.id,
+                ctfId: ctf.id,
+                startedAt: now,
+                solvedAt: now
+              }
+            }),
+            // Update user points
+            prisma.user.update({
+              where: { id: user.id },
+              data: {
+                points: {
+                  increment: ctf.score
+                }
+              }
+            })
+          ]);
+        }
       } catch (error) {
         console.error('Error updating SolvedCTF record:', error);
         // Continue without throwing, user still deserves the "correct" message

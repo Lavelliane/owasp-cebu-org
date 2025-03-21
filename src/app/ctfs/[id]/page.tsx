@@ -42,7 +42,7 @@ export default async function CTFDetailPage({ params }: { params: Promise<{ id: 
     include: {
       solvedCTFs: {
         where: { ctfId: id },
-        select: { ctfId: true, solvedAt: true }
+        select: { ctfId: true, solvedAt: true, startedAt: true }
       }
     }
   });
@@ -72,7 +72,8 @@ export default async function CTFDetailPage({ params }: { params: Promise<{ id: 
   // Check if the user has started or solved this CTF
   const userCTF = user.solvedCTFs[0];
   const isStarted = !!userCTF;
-  const isSolved = !!userCTF?.solvedAt;
+  // Only consider it solved if solvedAt is not null
+  const isSolved = isStarted && userCTF.solvedAt !== null;
   
   // Record start time if user hasn't started this challenge yet
   if (!isStarted) {

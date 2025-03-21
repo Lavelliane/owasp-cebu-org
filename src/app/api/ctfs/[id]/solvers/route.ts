@@ -32,10 +32,13 @@ export async function GET(
     }
     
     // Get all solvers for this CTF with their solve times
+    // Only include records where solvedAt is not null
     const solvers = await prisma.solvedCTF.findMany({
       where: {
         ctfId,
-        solvedAt: { not: undefined }
+        NOT: {
+          solvedAt: null
+        }
       },
       include: {
         user: {
@@ -50,37 +53,36 @@ export async function GET(
     
     // Calculate solve time in seconds from start time to solve time
     const solversWithTime = solvers
-      .filter(solver => 
-        solver.solvedAt !== null && 
-        solver.solvedAt !== undefined && 
-        solver.startedAt !== null &&
-        solver.startedAt !== undefined
-      )
       .map(solver => {
         try {
+          if (!solver.solvedAt || !solver.startedAt) {
+            return null;
+          }
+          
           const solveTimeSeconds = Math.floor(
-            (solver.solvedAt!.getTime() - solver.startedAt.getTime()) / 1000
+            (solver.solvedAt.getTime() - solver.startedAt.getTime()) / 1000
           );
+          
+          // Make sure solve time is at least 1 second
+          const adjustedTime = Math.max(solveTimeSeconds, 1);
           
           return {
             userId: solver.user.id,
             userName: solver.user.name,
-            solveTimeSeconds,
+            solveTimeSeconds: adjustedTime,
             solvedAt: solver.solvedAt,
           };
         } catch (error) {
           console.error(`Error processing solver ${solver.user.name}:`, error);
-          // Return a default object with a large solve time to push it to the bottom of the leaderboard
-          return {
-            userId: solver.user.id,
-            userName: solver.user.name,
-            solveTimeSeconds: Number.MAX_SAFE_INTEGER,
-            solvedAt: solver.solvedAt,
-          };
+          return null;
         }
       })
-      // Filter out any items with MAX_SAFE_INTEGER (error records)
-      .filter(item => item.solveTimeSeconds !== Number.MAX_SAFE_INTEGER);
+      .filter(item => item !== null) as {
+        userId: string;
+        userName: string;
+        solveTimeSeconds: number;
+        solvedAt: Date;
+      }[];
     
     return NextResponse.json({ solvers: solversWithTime });
     
