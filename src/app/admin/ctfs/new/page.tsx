@@ -17,7 +17,7 @@ const ctfSchema = z.object({
   category: z.string().min(1, 'Category is required'),
   flag: z.string().min(1, 'Flag is required'),
   link: z.string().optional(),
-  score: z.number().min(1, 'Score must be at least 1').max(1000, 'Score must be at most 1000')
+  score: z.number().min(0, 'Score must be at least 0').max(999999, 'Score must be at most 999999')
 });
 
 type CTFFormData = z.infer<typeof ctfSchema>;
