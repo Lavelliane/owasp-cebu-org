@@ -26,6 +26,7 @@ export default function EditCTFPage({ params }: { params: { id: string } }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState('');
+  const id = params.id;
   
   const {
     register,
@@ -49,7 +50,7 @@ export default function EditCTFPage({ params }: { params: { id: string } }) {
     const fetchCTF = async () => {
       try {
         setIsFetching(true);
-        const response = await fetch(`/api/admin/ctfs/${params.id}`);
+        const response = await fetch(`/api/admin/ctfs/${id}`);
         
         if (!response.ok) {
           if (response.status === 404) {
@@ -78,14 +79,14 @@ export default function EditCTFPage({ params }: { params: { id: string } }) {
     };
 
     fetchCTF();
-  }, [params.id, reset]);
+  }, [id, reset]);
 
   const onSubmit = async (data: CTFFormData) => {
     setError('');
     setIsLoading(true);
     
     try {
-      const response = await fetch(`/api/admin/ctfs/${params.id}`, {
+      const response = await fetch(`/api/admin/ctfs/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
