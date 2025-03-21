@@ -82,7 +82,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
           <div className="prose lg:prose-xl">
             <h2 className="text-3xl font-bold mb-6 text-indigo-900">About OWASP Cebu</h2>
             <p className="text-lg text-gray-900 mb-4">
-              OWASP Cebu's mission is to promote web application security awareness and best practices in the Cebu region.
+              OWASP Cebu&apos;s mission is to promote web application security awareness and best practices in the Cebu region.
             </p>
             
             <div className="mb-12">
