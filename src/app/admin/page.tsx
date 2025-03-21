@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function AdminDashboard() {
@@ -9,7 +8,6 @@ export default function AdminDashboard() {
     totalCTFs: 0,
     totalUsers: 0
   });
-  const router = useRouter();
 
   useEffect(() => {
     // In a real app, you would fetch these stats from API

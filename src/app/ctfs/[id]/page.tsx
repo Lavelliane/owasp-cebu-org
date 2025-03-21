@@ -73,12 +73,6 @@ export default async function CTFDetailPage({ params }: { params: { id: string }
   // Check if the user has solved this CTF
   const isSolved = user.solvedCTFs.length > 0;
 
-  // Create the CTF object with isSolved property
-  const ctfWithSolvedStatus: CTFDetails = {
-    ...ctf,
-    isSolved
-  };
-
   return (
     <div className="bg-gray-900 rounded-lg border border-gray-800 overflow-hidden">
       <div className="bg-gray-800 px-6 py-4 flex justify-between items-center">

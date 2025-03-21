@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 interface CTF {
   id: string;
@@ -15,7 +14,6 @@ export default function CTFsPage() {
   const [ctfs, setCtfs] = useState<CTF[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const router = useRouter();
 
   useEffect(() => {
     const fetchCTFs = async () => {

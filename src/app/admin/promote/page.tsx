@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function PromoteUserPage() {
@@ -11,7 +10,6 @@ export default function PromoteUserPage() {
     type: 'success' | 'error' | 'info' | null;
   }>({ message: '', type: null });
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const handlePromote = async (e: React.FormEvent) => {
     e.preventDefault();

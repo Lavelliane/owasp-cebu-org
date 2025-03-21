@@ -41,6 +41,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTerminalOpen]);
 
   const toggleTerminal = () => {

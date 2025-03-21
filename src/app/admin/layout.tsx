@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { useSession } from 'next-auth/react';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { authOptions } from '@/lib/authOptions';
