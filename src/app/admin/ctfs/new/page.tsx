@@ -16,6 +16,7 @@ const ctfSchema = z.object({
   hint: z.string().optional(),
   category: z.string().min(1, 'Category is required'),
   flag: z.string().min(1, 'Flag is required'),
+  link: z.string().optional(),
   score: z.number().min(1, 'Score must be at least 1').max(1000, 'Score must be at most 1000')
 });
 
@@ -38,6 +39,7 @@ export default function NewCTFPage() {
       hint: '',
       category: '',
       flag: '',
+      link: '',
       score: 100
     }
   });
@@ -197,6 +199,23 @@ export default function NewCTFPage() {
                   {errors.flag.message}
                 </Form.Message>
               )}
+            </Form.Field>
+          </div>
+          
+          <div className="space-y-2">
+            <Label.Root className="block text-sm font-medium" htmlFor="link">
+              Link (Optional)
+            </Label.Root>
+            <Form.Field className="space-y-1" name="link">
+              <Form.Control asChild>
+                <input
+                  id="link"
+                  className="w-full p-2 bg-black border border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-white"
+                  type="text"
+                  disabled={isLoading}
+                  {...register('link')}
+                />
+              </Form.Control>
             </Form.Field>
           </div>
           

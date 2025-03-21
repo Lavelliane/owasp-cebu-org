@@ -4,11 +4,12 @@ import { prisma } from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { Role } from '@prisma/client';
 
-// Validation schema
+// Validation schema for CTF creation
 const ctfSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().min(1, 'Description is required'),
   hint: z.string().optional(),
+  link: z.string().optional(),
   category: z.string().min(1, 'Category is required'),
   flag: z.string().min(1, 'Flag is required'),
   score: z.number().min(1, 'Score must be at least 1').max(1000, 'Score must be at most 1000')
@@ -76,7 +77,7 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    const { title, description, hint, category, flag, score } = validationResult.data;
+    const { title, description, hint, link, category, flag, score } = validationResult.data;
     
     // Create the CTF
     const ctf = await prisma.cTF.create({
@@ -84,6 +85,7 @@ export async function POST(request: NextRequest) {
         title,
         description,
         hint,
+        link,
         category,
         flag,
         score,

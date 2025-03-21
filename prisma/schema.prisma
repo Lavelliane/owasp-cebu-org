@@ -76,6 +76,7 @@ model CTF {
   title       String
   description String    @db.Text
   hint        String?   @db.Text
+  link        String?
   category    String
   flag        String
   score       Int
@@ -100,7 +101,8 @@ model Submission {
 // Track which CTFs a user has solved
 model SolvedCTF {
   id        String    @id @default(cuid())
-  solvedAt  DateTime  @default(now())
+  startedAt DateTime  @default(now())
+  solvedAt  DateTime?
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   ctf       CTF       @relation(fields: [ctfId], references: [id], onDelete: Cascade)

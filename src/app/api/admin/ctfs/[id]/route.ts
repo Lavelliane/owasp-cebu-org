@@ -9,6 +9,7 @@ const ctfUpdateSchema = z.object({
   title: z.string().min(1, 'Title is required').optional(),
   description: z.string().min(1, 'Description is required').optional(),
   hint: z.string().optional(),
+  link: z.string().optional(),
   category: z.string().min(1, 'Category is required').optional(),
   flag: z.string().min(1, 'Flag is required').optional(),
   score: z.number().min(1, 'Score must be at least 1').max(1000, 'Score must be at most 1000').optional()

@@ -19,7 +19,10 @@ export async function POST(
       where: { email: session.user.email as string },
       include: {
         solvedCTFs: {
-          where: { ctfId: id }
+          where: { 
+            ctfId: id,
+            solvedAt: { not: undefined }
+          }
         }
       }
     });
@@ -70,22 +73,38 @@ export async function POST(
 
     // If correct, mark as solved and update points
     if (correct) {
-      await prisma.$transaction([
-        // Mark as solved
-        prisma.solvedCTF.create({
-          data: {
-            userId: user.id,
-            ctfId: ctf.id
-          }
-        }),
-        // Update user points
-        prisma.user.update({
-          where: { id: user.id },
-          data: {
-            points: user.points + ctf.score
-          }
-        })
-      ]);
+      try {
+        await prisma.$transaction([
+          // Upsert the SolvedCTF record with solvedAt timestamp
+          prisma.solvedCTF.upsert({
+            where: {
+              userId_ctfId: {
+                userId: user.id,
+                ctfId: ctf.id
+              }
+            },
+            update: {
+              solvedAt: new Date()
+            },
+            create: {
+              userId: user.id,
+              ctfId: ctf.id,
+              startedAt: new Date(),
+              solvedAt: new Date()
+            }
+          }),
+          // Update user points
+          prisma.user.update({
+            where: { id: user.id },
+            data: {
+              points: user.points + ctf.score
+            }
+          })
+        ]);
+      } catch (error) {
+        console.error('Error updating SolvedCTF record:', error);
+        // Continue without throwing, user still deserves the "correct" message
+      }
     }
     
     return NextResponse.json({
