@@ -46,8 +46,11 @@ export default function AuthForm({ mode }: AuthFormProps) {
   return (
     <div className="w-full max-w-md mx-auto bg-black p-8 rounded-lg border border-gray-800">
       <h2 className="text-2xl font-bold mb-6 text-center">
-        {mode === 'login' ? 'Sign In to Your Account' : 'Create an Account'}
+        {mode === 'login' ? 'Defend. Detect. Develop.' : 'Create an Account'}
       </h2>
+      <p className="text-center text-gray-400 mb-6 text-md">
+        {mode === 'login' ? 'Welcome to OWASP Cebu' : 'Join the Mission'}
+      </p>
       
       {generalError && (
         <div className="mb-4 p-3 bg-red-900/30 border border-red-800 rounded text-red-300 text-sm">
