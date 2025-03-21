@@ -10,6 +10,7 @@ import { z } from 'zod'
 import * as Form from '@radix-ui/react-form'
 import * as Label from '@radix-ui/react-label'
 import { isStrongPassword } from '@/lib/auth/utils'
+import GoogleSignInButton from './google-signin-button'
 
 // Define Zod schemas for validation
 const loginSchema = z.object({
@@ -140,65 +141,80 @@ function LoginForm({
   }
 
   return (
-    <Form.Root className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-      <div className="space-y-2">
-        <Label.Root className="block text-sm font-medium" htmlFor="email">
-          Email
-        </Label.Root>
-        <Form.Field className="space-y-1" name="email">
-          <Form.Control asChild>
-            <input
-              id="email"
-              className={`w-full p-2 bg-black border ${
-                errors.email ? 'border-red-500' : 'border-gray-700'
-              } rounded-md focus:outline-none focus:ring-1 focus:ring-white`}
-              type="email"
-              disabled={isLoading}
-              {...register('email')}
-            />
-          </Form.Control>
-          {errors.email && (
-            <Form.Message className="text-sm text-red-500">
-              {errors.email.message}
-            </Form.Message>
-          )}
-        </Form.Field>
+    <>
+      <Form.Root className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <div className="space-y-2">
+          <Label.Root className="block text-sm font-medium" htmlFor="email">
+            Email
+          </Label.Root>
+          <Form.Field className="space-y-1" name="email">
+            <Form.Control asChild>
+              <input
+                id="email"
+                className={`w-full p-2 bg-black border ${
+                  errors.email ? 'border-red-500' : 'border-gray-700'
+                } rounded-md focus:outline-none focus:ring-1 focus:ring-white`}
+                type="email"
+                disabled={isLoading}
+                {...register('email')}
+              />
+            </Form.Control>
+            {errors.email && (
+              <Form.Message className="text-sm text-red-500">
+                {errors.email.message}
+              </Form.Message>
+            )}
+          </Form.Field>
+        </div>
+        
+        <div className="space-y-2">
+          <Label.Root className="block text-sm font-medium" htmlFor="password">
+            Password
+          </Label.Root>
+          <Form.Field className="space-y-1" name="password">
+            <Form.Control asChild>
+              <input
+                id="password"
+                className={`w-full p-2 bg-black border ${
+                  errors.password ? 'border-red-500' : 'border-gray-700'
+                } rounded-md focus:outline-none focus:ring-1 focus:ring-white`}
+                type="password"
+                disabled={isLoading}
+                {...register('password')}
+              />
+            </Form.Control>
+            {errors.password && (
+              <Form.Message className="text-sm text-red-500">
+                {errors.password.message}
+              </Form.Message>
+            )}
+          </Form.Field>
+        </div>
+        
+        <Form.Submit asChild>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-white text-black py-2 px-4 rounded-md font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition mt-6"
+          >
+            {isLoading ? 'Processing...' : 'Sign In'}
+          </button>
+        </Form.Submit>
+      </Form.Root>
+      
+      <div className="mt-6 relative">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-gray-700"></div>
+        </div>
+        <div className="relative flex justify-center text-sm">
+          <span className="px-2 bg-black text-gray-400">Or continue with</span>
+        </div>
       </div>
       
-      <div className="space-y-2">
-        <Label.Root className="block text-sm font-medium" htmlFor="password">
-          Password
-        </Label.Root>
-        <Form.Field className="space-y-1" name="password">
-          <Form.Control asChild>
-            <input
-              id="password"
-              className={`w-full p-2 bg-black border ${
-                errors.password ? 'border-red-500' : 'border-gray-700'
-              } rounded-md focus:outline-none focus:ring-1 focus:ring-white`}
-              type="password"
-              disabled={isLoading}
-              {...register('password')}
-            />
-          </Form.Control>
-          {errors.password && (
-            <Form.Message className="text-sm text-red-500">
-              {errors.password.message}
-            </Form.Message>
-          )}
-        </Form.Field>
+      <div className="mt-6">
+        <GoogleSignInButton />
       </div>
-      
-      <Form.Submit asChild>
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-white text-black py-2 px-4 rounded-md font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition mt-6"
-        >
-          {isLoading ? 'Processing...' : 'Sign In'}
-        </button>
-      </Form.Submit>
-    </Form.Root>
+    </>
   )
 }
 
@@ -264,88 +280,103 @@ function RegisterForm({
   }
 
   return (
-    <Form.Root className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-      <div className="space-y-2">
-        <Label.Root className="block text-sm font-medium" htmlFor="name">
-          Name
-        </Label.Root>
-        <Form.Field className="space-y-1" name="name">
-          <Form.Control asChild>
-            <input
-              id="name"
-              className={`w-full p-2 bg-black border ${
-                errors.name ? 'border-red-500' : 'border-gray-700'
-              } rounded-md focus:outline-none focus:ring-1 focus:ring-white`}
-              type="text"
-              disabled={isLoading}
-              {...register('name')}
-            />
-          </Form.Control>
-          {errors.name && (
-            <Form.Message className="text-sm text-red-500">
-              {errors.name.message}
-            </Form.Message>
-          )}
-        </Form.Field>
+    <>
+      <Form.Root className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <div className="space-y-2">
+          <Label.Root className="block text-sm font-medium" htmlFor="name">
+            Name
+          </Label.Root>
+          <Form.Field className="space-y-1" name="name">
+            <Form.Control asChild>
+              <input
+                id="name"
+                className={`w-full p-2 bg-black border ${
+                  errors.name ? 'border-red-500' : 'border-gray-700'
+                } rounded-md focus:outline-none focus:ring-1 focus:ring-white`}
+                type="text"
+                disabled={isLoading}
+                {...register('name')}
+              />
+            </Form.Control>
+            {errors.name && (
+              <Form.Message className="text-sm text-red-500">
+                {errors.name.message}
+              </Form.Message>
+            )}
+          </Form.Field>
+        </div>
+        
+        <div className="space-y-2">
+          <Label.Root className="block text-sm font-medium" htmlFor="register-email">
+            Email
+          </Label.Root>
+          <Form.Field className="space-y-1" name="email">
+            <Form.Control asChild>
+              <input
+                id="register-email"
+                className={`w-full p-2 bg-black border ${
+                  errors.email ? 'border-red-500' : 'border-gray-700'
+                } rounded-md focus:outline-none focus:ring-1 focus:ring-white`}
+                type="email"
+                disabled={isLoading}
+                {...register('email')}
+              />
+            </Form.Control>
+            {errors.email && (
+              <Form.Message className="text-sm text-red-500">
+                {errors.email.message}
+              </Form.Message>
+            )}
+          </Form.Field>
+        </div>
+        
+        <div className="space-y-2">
+          <Label.Root className="block text-sm font-medium" htmlFor="register-password">
+            Password
+          </Label.Root>
+          <Form.Field className="space-y-1" name="password">
+            <Form.Control asChild>
+              <input
+                id="register-password"
+                className={`w-full p-2 bg-black border ${
+                  errors.password ? 'border-red-500' : 'border-gray-700'
+                } rounded-md focus:outline-none focus:ring-1 focus:ring-white`}
+                type="password"
+                disabled={isLoading}
+                {...register('password')}
+              />
+            </Form.Control>
+            {errors.password && (
+              <Form.Message className="text-sm text-red-500">
+                {errors.password.message}
+              </Form.Message>
+            )}
+          </Form.Field>
+        </div>
+        
+        <Form.Submit asChild>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-white text-black py-2 px-4 rounded-md font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition mt-6"
+          >
+            {isLoading ? 'Processing...' : 'Create Account'}
+          </button>
+        </Form.Submit>
+      </Form.Root>
+      
+      <div className="mt-6 relative">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-gray-700"></div>
+        </div>
+        <div className="relative flex justify-center text-sm">
+          <span className="px-2 bg-black text-gray-400">Or continue with</span>
+        </div>
       </div>
       
-      <div className="space-y-2">
-        <Label.Root className="block text-sm font-medium" htmlFor="register-email">
-          Email
-        </Label.Root>
-        <Form.Field className="space-y-1" name="email">
-          <Form.Control asChild>
-            <input
-              id="register-email"
-              className={`w-full p-2 bg-black border ${
-                errors.email ? 'border-red-500' : 'border-gray-700'
-              } rounded-md focus:outline-none focus:ring-1 focus:ring-white`}
-              type="email"
-              disabled={isLoading}
-              {...register('email')}
-            />
-          </Form.Control>
-          {errors.email && (
-            <Form.Message className="text-sm text-red-500">
-              {errors.email.message}
-            </Form.Message>
-          )}
-        </Form.Field>
+      <div className="mt-6">
+        <GoogleSignInButton />
       </div>
-      
-      <div className="space-y-2">
-        <Label.Root className="block text-sm font-medium" htmlFor="register-password">
-          Password
-        </Label.Root>
-        <Form.Field className="space-y-1" name="password">
-          <Form.Control asChild>
-            <input
-              id="register-password"
-              className={`w-full p-2 bg-black border ${
-                errors.password ? 'border-red-500' : 'border-gray-700'
-              } rounded-md focus:outline-none focus:ring-1 focus:ring-white`}
-              type="password"
-              disabled={isLoading}
-              {...register('password')}
-            />
-          </Form.Control>
-          {errors.password && (
-            <Form.Message className="text-sm text-red-500">
-              {errors.password.message}
-            </Form.Message>
-          )}
-        </Form.Field>
-      </div>
-      
-      <Form.Submit asChild>
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-white text-black py-2 px-4 rounded-md font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition mt-6"
-        >
-          {isLoading ? 'Processing...' : 'Sign Up'}
-        </button>
-      </Form.Submit>
-    </Form.Root>
+    </>
   )
 } 
