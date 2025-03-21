@@ -25,10 +25,13 @@ model User {
   email         String    @unique
   password      String
   role          Role      @default(MEMBER)
+  points        Int       @default(0)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
+  submissions   Submission[]
+  solvedCTFs    SolvedCTF[]
 }
 
 model Account {
@@ -78,4 +81,30 @@ model CTF {
   score       Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  submissions Submission[]
+  solvedBy    SolvedCTF[]
+}
+
+// Track all submission attempts
+model Submission {
+  id        String    @id @default(cuid())
+  flag      String
+  correct   Boolean
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  ctf       CTF       @relation(fields: [ctfId], references: [id], onDelete: Cascade)
+  ctfId     String
+}
+
+// Track which CTFs a user has solved
+model SolvedCTF {
+  id        String    @id @default(cuid())
+  solvedAt  DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  ctf       CTF       @relation(fields: [ctfId], references: [id], onDelete: Cascade)
+  ctfId     String
+
+  @@unique([userId, ctfId])
 }

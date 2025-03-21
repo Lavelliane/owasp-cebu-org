@@ -77,7 +77,7 @@ export default function Home() {
               <span>Welcome, {session.user.name}</span>
               <button 
                 onClick={handleSignOut}
-                className="px-4 py-2 border border-white rounded hover:bg-white hover:bg-opacity-10 transition"
+                className="px-4 py-2 border border-white rounded hover:bg-white hover:text-black transition"
               >
                 Sign Out
               </button>
@@ -86,7 +86,7 @@ export default function Home() {
             <div className="flex gap-4">
               <Link 
                 href="/login"
-                className="px-4 py-2 border border-white rounded hover:bg-white hover:bg-opacity-10 transition"
+                className="px-4 py-2 border border-white rounded hover:bg-white hover:text-black transition"
               >
                 Sign In
               </Link>
@@ -118,9 +118,24 @@ export default function Home() {
               <button className="bg-white text-black px-6 py-3 rounded-md font-medium transition hover:bg-gray-200">
                 Learn More
               </button>
-              <button className="border border-white px-6 py-3 rounded-md font-medium transition hover:bg-white hover:bg-opacity-10">
+              <button className="border border-white px-6 py-3 rounded-md font-medium transition hover:bg-white hover:text-black">
                 Join Our Community
               </button>
+              <Link href="/ctfs" className="border border-white px-6 py-3 rounded-md font-medium transition hover:bg-white hover:text-black flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                  <line x1="4" y1="22" x2="4" y2="15"></line>
+                </svg>
+                CTF
+              </Link>
+              <Link href="/leaderboard" className="border border-white px-6 py-3 rounded-md font-medium transition hover:bg-white hover:text-black flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                  <path d="M18 20V10"></path>
+                  <path d="M12 20V4"></path>
+                  <path d="M6 20v-6"></path>
+                </svg>
+                Leaderboard
+              </Link>
             </div>
           </div>
           
