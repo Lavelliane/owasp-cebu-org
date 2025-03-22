@@ -277,8 +277,8 @@ export default function EditCTFPage({params}: {params: Promise<{ id: string }>})
                     errors.score ? 'border-red-500' : 'border-gray-700'
                   } rounded-md focus:outline-none focus:ring-1 focus:ring-white`}
                   type="number"
-                  min="1"
-                  max="1000"
+                  min="0"
+                  max="999999"
                   disabled={isLoading}
                   {...register('score', { valueAsNumber: true })}
                 />
