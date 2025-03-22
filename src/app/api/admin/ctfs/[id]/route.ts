@@ -12,7 +12,7 @@ const ctfUpdateSchema = z.object({
   link: z.string().optional(),
   category: z.string().min(1, 'Category is required').optional(),
   flag: z.string().min(1, 'Flag is required').optional(),
-  score: z.number().min(1, 'Score must be at least 1').max(1000, 'Score must be at most 1000').optional()
+  score: z.number().min(0, 'Score must be at least 1').max(1000, 'Score must be at most 1000').optional()
 });
 
 // Helper function to check admin authorization
