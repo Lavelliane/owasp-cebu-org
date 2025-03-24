@@ -3,6 +3,7 @@ import { redirect, notFound } from 'next/navigation';
 import { prisma } from '@/lib/db';
 import FlagSubmissionForm from './FlagSubmissionForm';
 import CTFLeaderboard from './CTFLeaderboard';
+import { SquareArrowOutUpRight } from 'lucide-react';
 
 interface CTFDetails {
   id: string;
@@ -60,7 +61,8 @@ export default async function CTFDetailPage({ params }: { params: Promise<{ id: 
       description: true,
       hint: true,
       category: true,
-      score: true
+      score: true,
+      link: true
     }
   });
   
@@ -111,6 +113,24 @@ export default async function CTFDetailPage({ params }: { params: Promise<{ id: 
           <div className="prose prose-invert max-w-none mb-8">
             <p className="text-gray-300 whitespace-pre-line">{ctf.description}</p>
           </div>
+
+          {ctf.link && (
+            <div className="mb-8">
+              <p className="mr-2">Access the Challenge here:</p>
+              <div className="flex items-center">
+                <a 
+                  href={ctf.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-blue-400 hover:text-blue-300 flex items-center"
+                >
+                  
+                  <span className="mr-2">Challenge URL</span>
+                  <SquareArrowOutUpRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          )}
           
           {ctf.hint && (
             <div className="mb-8">

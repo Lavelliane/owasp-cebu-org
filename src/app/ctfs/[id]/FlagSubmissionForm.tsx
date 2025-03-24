@@ -92,7 +92,7 @@ export default function FlagSubmissionForm({ ctfId }: FlagSubmissionFormProps) {
             type="text"
             value={flag}
             onChange={(e) => setFlag(e.target.value)}
-            placeholder="Enter flag (e.g., OWASP{flag_here})"
+            placeholder="Enter flag from original submission site or as given in the challenge"
             className="w-full p-2 bg-black border border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-white"
             disabled={isSubmitting}
           />

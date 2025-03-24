@@ -1,5 +1,6 @@
 'use client'
 
+import ProgressProvider from "@/components/providers/ProgressProvider";
 import { SessionProvider } from "next-auth/react";
 
 type Props = {
@@ -9,7 +10,9 @@ type Props = {
 export default function Providers({ children }: Props) {
   return (
     <SessionProvider>
-      {children}
+      <ProgressProvider>
+        {children}
+      </ProgressProvider>
     </SessionProvider>
   );
 } 
