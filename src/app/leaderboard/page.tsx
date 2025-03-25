@@ -207,7 +207,6 @@ export default function LeaderboardPage() {
                         <div className="flex items-center">
                           <div className="ml-4">
                             <div className="text-sm font-medium text-white">{user.name}</div>
-                            <div className="text-sm text-gray-400">{user.email}</div>
                           </div>
                         </div>
                       </td>
