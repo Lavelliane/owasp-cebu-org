@@ -60,7 +60,7 @@ export async function POST(
     }
 
     // Check if flag is correct
-    const correct = ctf.flag.trim().includes(flag.trim());
+    const correct = flag.trim().includes(ctf.flag.trim());
     
     // Create a submission record
     await prisma.submission.create({
